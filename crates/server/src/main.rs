@@ -5,6 +5,15 @@ fn index(_req: Request) -> Response {
     Ok(Content::Html(content))
 }
 
+fn chat(_req: Request) -> Response {
+    Ok(Content::Json(String::from(
+        "{\"messages\": [\"Hello world!\", \"And how does that make you feel?\"]}",
+    )))
+}
+
 fn main() {
-    miniserve::Server::new().route("/", index).run()
+    miniserve::Server::new()
+        .route("/", index)
+        .route("/chat", chat)
+        .run()
 }
